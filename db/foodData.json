@@ -1,0 +1,44 @@
+[
+  {
+    "name": "steak",
+    "calories": 620.1,
+    "carbohydrates_total_g": 0,
+    "cholesterol_mg": 217,
+    "fat_saturated_g": 16.5,
+    "fat_total_g": 42.6,
+    "fiber_g": 0,
+    "potassium_mg": 440,
+    "protein_g": 58.9,
+    "serving_size_g": 226.796,
+    "sodium_mg": 118,
+    "sugar_g": 0
+  },
+  {
+    "name": "eggs",
+    "calories": 216.5,
+    "carbohydrates_total_g": 1.1,
+    "cholesterol_mg": 560,
+    "fat_saturated_g": 4.7,
+    "fat_total_g": 14.1,
+    "fiber_g": 0,
+    "potassium_mg": 300,
+    "protein_g": 18.9,
+    "serving_size_g": 150,
+    "sodium_mg": 215,
+    "sugar_g": 0.6
+  },
+  {
+    "name": "rice",
+    "calories": 433.4,
+    "carbohydrates_total_g": 96.8,
+    "cholesterol_mg": 0,
+    "fat_saturated_g": 0.3,
+    "fat_total_g": 1,
+    "fiber_g": 1.4,
+    "potassium_mg": 144,
+    "protein_g": 9.1,
+    "serving_size_g": 340.19399999999996,
+    "sodium_mg": 3,
+    "sugar_g": 0.2
+  }
+]
