@@ -1,4 +1,4 @@
-const mongoose = require('../db/connection');
+const mongoose = require("../db/connection");
 
 const FoodSchema = new mongoose.Schema(
   {
@@ -17,4 +17,4 @@ const FoodSchema = new mongoose.Schema(
   }
 );
 
-module.export = mongoose.model('Food', FoodSchema);
+module.exports = mongoose.model("Food", FoodSchema);

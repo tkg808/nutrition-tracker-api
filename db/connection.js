@@ -1,5 +1,5 @@
 /* === Config === */
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 require("dotenv").config();
 
 // Use different databases for production and development.
@@ -14,8 +14,8 @@ mongoose.connect(mongoURI)
   })
   .catch((error) => 
   {
-    console.log('Connection failed!', error);
+    console.log("Connection failed!", error);
   });
 
-// Use this configured mongoose through API.
+// Use this configured mongoose throughout API.
 module.exports = mongoose;
