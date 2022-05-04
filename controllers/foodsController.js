@@ -3,9 +3,12 @@ const express = require("express");
 const router = express.Router();
 const Food = require("../models/Food");
 
+// Import for tokens.
+const { requireToken } = require("../middleware/auth");
+
 /* === Routes === */
 // INDEX -- get all.
-router.get("/", (request, response, next) =>
+router.get("/", requireToken, (request, response, next) =>
 {
   Food.find()
     .then((foods) => response.json(foods))
@@ -13,7 +16,7 @@ router.get("/", (request, response, next) =>
 });
 
 // SHOW -- get by id.
-router.get("/:id", (request, response, next) =>
+router.get("/:id", requireToken, (request, response, next) =>
 {
   Food.findById(request.params.id)
     .then((food) => response.json(food))
@@ -21,7 +24,7 @@ router.get("/:id", (request, response, next) =>
 });
 
 // CREATE -- add new.
-router.post("/", (request, response, next) =>
+router.post("/", requireToken, (request, response, next) =>
 {
   Food.create(request.body)
     .then((newFood) => response.json(newFood))
@@ -29,7 +32,7 @@ router.post("/", (request, response, next) =>
 });
 
 // DELETE -- remove by id.
-router.delete("/:id", (request, response, next) =>
+router.delete("/:id", requireToken, (request, response, next) =>
 {
   Food.findByIdAndDelete(request.params.id)
     .then((food) => response.json(food))
