@@ -31,6 +31,14 @@ router.post("/", requireToken, (request, response, next) =>
     .catch(next);
 });
 
+// EDIT -- update.
+router.put("/:id", requireToken, (request, response, next) =>
+{
+  Food.findByIdAndUpdate(request.params.id, request.body, { new: true })
+    .then((food) => response.json(food))
+    .catch(next);
+});
+
 // DELETE -- remove by id.
 router.delete("/:id", requireToken, (request, response, next) =>
 {
