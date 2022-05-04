@@ -5,35 +5,35 @@ const Food = require("../models/Food");
 
 /* === Routes === */
 // INDEX -- get all.
-router.get("/", (request, response) =>
+router.get("/", (request, response, next) =>
 {
   Food.find()
     .then((foods) => response.json(foods))
-    .catch(console.error);
+    .catch(next);
 });
 
 // SHOW -- get by id.
-router.get("/:id", (request, response) =>
+router.get("/:id", (request, response, next) =>
 {
   Food.findById(request.params.id)
     .then((food) => response.json(food))
-    .catch(console.error);
+    .catch(next);
 });
 
 // CREATE -- add new.
-router.post("/", (request, response) =>
+router.post("/", (request, response, next) =>
 {
   Food.create(request.body)
     .then((newFood) => response.json(newFood))
-    .catch(console.error);
+    .catch(next);
 });
 
 // DELETE -- remove by id.
-router.delete("/:id", (request, response) =>
+router.delete("/:id", (request, response, next) =>
 {
   Food.findByIdAndDelete(request.params.id)
     .then((food) => response.json(food))
-    .catch(console.error);
+    .catch(next);
 });
 
 module.exports = router;

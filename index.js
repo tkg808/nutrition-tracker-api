@@ -1,7 +1,6 @@
 /* === Config === */
 const express = require("express");
 const app = express();
-
 app.set("port", process.env.PORT || 8000);
 
 /* === Middleware === */
@@ -28,6 +27,10 @@ app.get("/", (request, response) =>
 
 const foodsController = require("./controllers/foodsController");
 app.use("/foods", foodsController);
+
+// Configured right before connecting.
+const { handleErrors } = require("./middleware/error_handler");
+app.use(handleErrors);
 
 /* === Connection === */
 app.listen(app.get("port"), () =>
