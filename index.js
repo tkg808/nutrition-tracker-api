@@ -33,7 +33,7 @@ app.use("/api/users", usersController);
 
 /* === Connection === */
 // Configured right before connecting.
-const { handleErrors } = require("./middleware/error_handler");
+const { handleErrors } = require("./middleware/custom_errors");
 app.use(handleErrors);
 
 app.listen(app.get("port"), () =>

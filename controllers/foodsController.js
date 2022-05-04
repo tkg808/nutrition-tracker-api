@@ -3,6 +3,13 @@ const express = require("express");
 const router = express.Router();
 const Food = require("../models/Food");
 
+// Import errors.
+const {
+  handleValidateId,
+  handleRecordExists,
+  handleValidateOwnership
+} = require("../middleware/custom_errors");
+
 // Import for tokens.
 const { requireToken } = require("../middleware/auth");
 
