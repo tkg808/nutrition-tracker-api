@@ -21,15 +21,15 @@ app.use(requestLogger);
 // Handles redirect.
 app.get("/", (request, response) =>
 {
-  response.redirect("/foods");
+  response.redirect("/api/foods");
 });
 
 /* === Controllers === */
 const foodsController = require("./controllers/foodsController");
-app.use("/foods", foodsController);
+app.use("/api/foods", foodsController);
 
 const usersController = require("./controllers/usersController");
-app.use("/users", usersController);
+app.use("/api/users", usersController);
 
 /* === Connection === */
 // Configured right before connecting.
