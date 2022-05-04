@@ -13,7 +13,13 @@ const FoodSchema = new mongoose.Schema(
     protein_g: Number,
     serving_size_g: Number,
     sodium_mg: Number,
-    sugar_g: Number
+    sugar_g: Number,
+    owner:
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true
+    }
   }
 );
 
