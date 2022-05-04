@@ -16,10 +16,12 @@ const UserSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    // Prevents passwords from being sent to the client.
     toJSON:
     {
+      // Used to transform data outside of the database.
       virtuals: true,
-      // ret is the returned Mongoose doccument.
+      // "ret" is the returned Mongoose doccument.
       transform: (_doc, ret) =>
       {
         delete ret.passward;
