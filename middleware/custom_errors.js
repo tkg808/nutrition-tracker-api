@@ -88,7 +88,7 @@ const handleValidateId = function (request, response, next)
 {
   const isValidId = mongoose.Types.ObjectId.isValid(request.params.id);
 
-  if (!isValid)
+  if (!isValidId)
   {
     throw new InvalidIdError();
   }
