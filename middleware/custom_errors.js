@@ -1,7 +1,11 @@
 const mongoose = require("mongoose");
 
+/* === Errors === */
+
 // Extend JS 'Error.prototype' to use app-specific info in responses.
 
+// Index route only send user-authorized data.
+// So this only occurs if user manually goes to an endpoint where they don't have ownership of the data.
 class OwnderShipError extends Error
 {
   constructor()
@@ -13,6 +17,7 @@ class OwnderShipError extends Error
   }
 }
 
+// Occurs when the ID isn't found in the database.
 class DocumentNotFoundError extends Error
 {
   constructor()
@@ -24,6 +29,7 @@ class DocumentNotFoundError extends Error
   }
 }
 
+// Occurs when a partial request is sent from the client.
 class BadParamsError extends Error
 {
   constructor()
@@ -35,6 +41,7 @@ class BadParamsError extends Error
   }
 }
 
+// Occurs on a bad login attempt.
 class BadCredentialsError extends Error
 {
   constructor()
@@ -46,6 +53,7 @@ class BadCredentialsError extends Error
   }
 }
 
+// Occurs when user manually goes to an endpoint that doesn't exist.
 class InvalidIdError extends Error
 {
   constructor()
@@ -57,8 +65,11 @@ class InvalidIdError extends Error
   }
 }
 
+/* === Validations === */
+
 const handleValidateOwnership = function (request, document)
 {
+  // Dynamically chooses between parent or child reference.
   const ownerId = document.owner._id || document.owner;
 
   // Check if the curreent user is also the owner of the document.
@@ -98,6 +109,7 @@ const handleValidateId = function (request, response, next)
   }
 }
 
+// TODO: When would a user encounter this?
 const handleValidationErrors = function (error, request, response)
 {
   if (error.name.match(/Valid/) || error.name === "MongoError")
