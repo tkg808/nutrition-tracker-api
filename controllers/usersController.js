@@ -12,7 +12,7 @@ const { handleExistingUser } = require("../middleware/custom_errors");
 router.post("/signup", (request, response, next) =>
 {
   // Check if username or email is already taken.
-  User.find(
+  User.findOne(
     {
       $or:
         [
@@ -45,7 +45,7 @@ const { createUserToken } = require("../middleware/auth");
 router.post("/login", (request, response, next) =>
 {
   // Use email to look for user in database.
-  User.findOne({ email: request.body.email })
+  User.findOne({ username: request.body.username })
     // Try to create token with user and the request => Send token to client or throw error.
     .then((user) => createUserToken(request, user))
     .then((token) => response.json({ token }))

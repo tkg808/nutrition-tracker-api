@@ -106,9 +106,9 @@ const handleRecordExists = function (record)
   }
 };
 
-const handleExistingUser = function (users)
+const handleExistingUser = function (user)
 {
-  if (users.length > 0)
+  if (user)
   {
     throw new ExistingUserError();
   }
