@@ -65,6 +65,17 @@ class InvalidIdError extends Error
   }
 }
 
+class ExistingUserError extends Error
+{
+  constructor()
+  {
+    super();
+    this.name = "ExistingUserError";
+    this.statusCode = 422;
+    this.message = "The provided username or email is already taken"
+  }
+}
+
 /* === Validations === */
 
 const handleValidateOwnership = function (request, document)
@@ -94,6 +105,14 @@ const handleRecordExists = function (record)
     return record;
   }
 };
+
+const handleExistingUser = function (users)
+{
+  if (users.length > 0)
+  {
+    throw new ExistingUserError();
+  }
+}
 
 const handleValidateId = function (request, response, next)
 {
@@ -138,5 +157,6 @@ module.exports =
   handleRecordExists,
   handleValidateId,
   handleValidationErrors,
-  handleErrors
+  handleErrors,
+  handleExistingUser
 }

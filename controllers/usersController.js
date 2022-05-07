@@ -5,14 +5,28 @@ const User = require("../models/User");
 // Handles hashing.
 const bcrypt = require("bcrypt");
 
+// Import errors.
+const { handleExistingUser } = require("../middleware/custom_errors");
+
 // POST -- sign up
 router.post("/signup", (request, response, next) =>
 {
-  bcrypt.hash(request.body.password, 10)
+  // Check if username or email is already taken.
+  User.find(
+    {
+      $or:
+        [
+          { username: request.body.username },
+          { email: request.body.email }
+        ]
+    })
+    .then(handleExistingUser)
+    .then(() => bcrypt.hash(request.body.password, 10))
     // Returns a new object with the email and hashed password.
     .then((hash) =>
     // Parentheses needed to read curly braces as object and not function block.
     ({
+      username: request.body.username,
       email: request.body.email,
       password: hash
     })
