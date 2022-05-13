@@ -64,4 +64,21 @@ function createUserToken(request, user)
   return jwt.sign({ id: user._id }, secret, { expiresIn: 36000 });
 }
 
-module.exports = { requireToken, createUserToken };
+const jwtDecode = require("jwt-decode");
+
+function getIdFromToken(request)
+{
+  // Remove "bearer " from string.
+  const token = request.headers.authorization.slice(7);
+
+  if (!token)
+  {
+    const error = new Error("The credentials provided is incorrect");
+    error.statusCode = 422;
+    throw error;
+  }
+
+  return jwtDecode(token).id;
+}
+
+module.exports = { requireToken, createUserToken, getIdFromToken };

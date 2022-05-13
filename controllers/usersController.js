@@ -52,4 +52,14 @@ router.post("/login", (request, response, next) =>
     .catch(next);
 });
 
+const { getIdFromToken } = require("../middleware/auth")
+
+router.get("/me", (request, response, next) =>
+{
+  // Use decoded id to find user.
+  User.findById(getIdFromToken(request))
+    .then((user) => response.json(user.username))
+    .catch(next)
+});
+
 module.exports = router;
