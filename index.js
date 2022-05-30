@@ -15,9 +15,10 @@ const cors = require("cors");
 
 const domains =
   [
-    `https://localhost:8000`,
-    `http://localhost:8000`,
-    "https://nutrition-tracker.netlify.app"
+    "https://localhost:8000",
+    "http://localhost:8000",
+    "https://nutrition-tracker.netlify.app",
+    "https://nutritional-tracker-api.herokuapp.com/"
   ];
 
 const corsOptions =
