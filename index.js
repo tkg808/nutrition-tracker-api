@@ -25,9 +25,14 @@ const corsOptions =
 {
   origin: function (origin, callback)
   {
-    (!origin || domains.indexOf(origin) !== -1 ?
-      callback(null, true) :
-      callback(new Error("Not allowed by CORS")));
+    if (!origin || domains.indexOf(origin) !== -1)
+    {
+      callback(new Error("Not allowed by CORS"))
+    }
+    else
+    {
+      callback(null, true)
+    }
   },
   credentials: true,
 };
