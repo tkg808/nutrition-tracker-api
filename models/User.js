@@ -19,6 +19,28 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true
     },
+    metrics:
+    {
+      type:
+      {
+        gender: String,
+        age: Number,
+        height: Number,
+        weight: Number,
+        activityLevel: mongoose.Decimal128
+      },
+      default: null
+    },
+    macros:
+    {
+      type:
+      {
+        fatsPercent: Number,
+        carbsPercent: Number,
+        proteinsPercent: Number
+      },
+      default: null
+    }
   },
   {
     timestamps: true,

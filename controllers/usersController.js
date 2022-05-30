@@ -58,7 +58,11 @@ router.get("/me", (request, response, next) =>
 {
   // Use decoded id to find user.
   User.findById(getIdFromToken(request))
-    .then((user) => response.json({ username: user.username }))
+    .then((user) => response.json({
+      username: user.username,
+      metrics: user.metrics,
+      macros: user.macros
+    }))
     .catch(next)
 });
 
