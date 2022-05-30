@@ -12,7 +12,25 @@ app.use(express.json());
 
 // Allow connections from all domains.
 const cors = require("cors");
-app.use(cors());
+
+const domains =
+  [
+    `https://localhost:8000${process.env.port || 8000}`,
+    "https://nutrition-tracker.netlify.app"
+  ];
+
+const corsOptions =
+{
+  origin: function (origin, callback)
+  {
+    (!origin || domains.indexOf(origin) !== -1) ?
+      callback(null, true) :
+      callback(new Error("Not allowed by CORS"))
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 // Log each request.
 const requestLogger = require("./middleware/request_logger");
