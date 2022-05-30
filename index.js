@@ -15,7 +15,8 @@ const cors = require("cors");
 
 const domains =
   [
-    `https://localhost:8000${process.env.port || 8000}`,
+    `https://localhost:8000`,
+    `http://localhost:8000`,
     "https://nutrition-tracker.netlify.app"
   ];
 
@@ -23,9 +24,9 @@ const corsOptions =
 {
   origin: function (origin, callback)
   {
-    (!origin || domains.indexOf(origin) !== -1) ?
+    (!origin || domains.indexOf(origin) !== -1 ?
       callback(null, true) :
-      callback(new Error("Not allowed by CORS"))
+      callback(new Error("Not allowed by CORS")));
   },
   credentials: true,
 };
