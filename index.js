@@ -5,7 +5,7 @@ app.set("port", process.env.PORT || 8000);
 
 // Allow connections from all domains.
 const cors = require("cors");
-app.use(cors({ origin: "*" }));
+app.use(cors());
 
 /* === Middleware === */
 // Parses key value pairs in request.
@@ -17,15 +17,6 @@ app.use(express.json());
 // Log each request.
 const requestLogger = require("./middleware/request_logger");
 app.use(requestLogger);
-
-// Fixes CORS preflight issue.
-app.all('/', (request, response, next) =>
-{
-  response.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
-  response.header("Access-Control-Allow-Origin", "*");
-  response.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next()
-});
 
 // Handles redirect.
 app.get("/", (request, response) =>
