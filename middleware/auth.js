@@ -3,7 +3,13 @@
 const passport = require("passport");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
+
+// NODE_ENV is a Heroku variable.
+// This prevents dotenv throwing errors when deployed.
+if (process.env.NODE_ENV !== "production")
+{
+  require("dotenv").config();
+}
 
 // Used to encrypt/decrypt the token.
 // Can be any string value -- even gibberish.
