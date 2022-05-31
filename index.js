@@ -3,9 +3,24 @@ const express = require("express");
 const app = express();
 app.set("port", process.env.PORT || 8000);
 
+// NODE_ENV is a Heroku variable.
+// This prevents dotenv throwing errors when deployed.
+if (process.env.NODE_ENV !== "production")
+{
+  require("dotenv").config();
+}
+
 // Allow connections from all domains.
 const cors = require("cors");
-app.use(cors());
+
+const corsOptions =
+{
+  origin: [process.env.REACT_APP_URL, "http://localhost:3000"],
+  credentials: true,
+  optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOptions));
 
 /* === Middleware === */
 // Parses key value pairs in request.
