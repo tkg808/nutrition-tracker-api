@@ -3,6 +3,10 @@ const express = require("express");
 const app = express();
 app.set("port", process.env.PORT || 8000);
 
+// Allow connections from all domains.
+const cors = require("cors");
+app.use(cors({ origin: "*" }));
+
 /* === Middleware === */
 // Parses key value pairs in request.
 app.use(express.urlencoded({ extended: true }));
@@ -10,38 +14,17 @@ app.use(express.urlencoded({ extended: true }));
 // Converts json strings to an object for the request.
 app.use(express.json());
 
-// Allow connections from all domains.
-const cors = require("cors");
-
-const domains =
-  [
-    "https://localhost:8000",
-    "http://localhost:8000",
-    "https://nutrition-tracker.netlify.app",
-    "https://nutritional-tracker-api.herokuapp.com"
-  ];
-
-const corsOptions =
-{
-  origin: function (origin, callback)
-  {
-    if (!origin || domains.indexOf(origin) !== -1)
-    {
-      callback(new Error("Not allowed by CORS"))
-    }
-    else
-    {
-      callback(null, true)
-    }
-  },
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
-
 // Log each request.
 const requestLogger = require("./middleware/request_logger");
 app.use(requestLogger);
+
+// Fixes CORS preflight issue.
+app.all('/', (request, response, next) =>
+{
+  response.header("Access-Control-Allow-Origin", "*");
+  response.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next()
+});
 
 // Handles redirect.
 app.get("/", (request, response) =>
