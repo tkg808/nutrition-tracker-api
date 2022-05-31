@@ -21,6 +21,7 @@ app.use(requestLogger);
 // Fixes CORS preflight issue.
 app.all('/', (request, response, next) =>
 {
+  response.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
   response.header("Access-Control-Allow-Origin", "*");
   response.header("Access-Control-Allow-Headers", "X-Requested-With");
   next()
