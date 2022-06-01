@@ -13,15 +13,15 @@ if (process.env.NODE_ENV !== "production")
 // Allow connections from all domains.
 const cors = require("cors");
 
-const corsOptions =
-{
-  // origin: [process.env.REACT_APP_URL, "http://localhost:3000"],
-  origin: ["*"],
-  credentials: true,
-  optionsSuccessStatus: 200
-};
+// const corsOptions =
+// {
+//   // origin: [process.env.REACT_APP_URL, "http://localhost:3000"],
+//   origin: ["*"],
+//   credentials: true,
+//   optionsSuccessStatus: 200
+// };
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 /* === Middleware === */
 // Parses key value pairs in request.
